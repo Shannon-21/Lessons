@@ -1,3 +1,5 @@
 sqlalchemy_env/
 sqlalchemy_example.db
 example.db
+.vscode/
+a.out

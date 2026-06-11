@@ -87,6 +87,60 @@ int string_compare(char * str1, char* str2) {
     return (len1 < len2) ? -1 : (len1 > len2) ? 1 : 0;
 }
 
+/* e) int string subcadena(char* str1, char* str2), que retorne el ´ındice de la primera ocurrencia
+de la cadena str2 en la cadena str1. En caso de no ocurrir nunca, retorna −1. */
+
+int string_subcadena(char* str1, char* str2) {
+    // strign rig
+    // string rig
+    int len1 = string_len(str1);
+    int len2 = string_len(str2);
+    int idx2 = 0;
+    int f_idx2 = -1;
+
+    if (len1 == 0 || len2 == 0) return f_idx2;
+
+    for (int idx1 = 0; idx1 < len1; idx1++) {
+        if (str1[idx1] == str2[idx2]) {
+            if (f_idx2 == -1) {
+                f_idx2 = idx1;
+            }
+            
+            idx2++;
+        }
+        else {
+            idx2 = 0;
+            f_idx2 = -1;
+        }
+
+        if (idx2 == len2) return f_idx2;
+    }
+
+    return f_idx2;
+}
+
+/* f) void string unir(char* arregloStrings[], int n, char* sep, char* res), que concatene
+las n cadenas del arreglo arregloStrings, separ´andolas por la cadena sep y almacenando el resultado en res.
+Nota: Si res no tiene espacio suficiente para almacenar el resultado, el comportamiento queda
+indefinido. */
+
+void string_unir(char* arregloStrings[], int n, char* sep, char* res) {
+    // for c in arr until n, res += c + sep; if c is last: res -= rep
+    int sep_size = string_len(sep);
+    int res_len = 0;
+
+    for (int i = 0; i < n; i++) {
+        int str_size = string_len(arregloStrings[i]);
+        int cp = string_concat(res + res_len, arregloStrings[i], str_size);
+        res_len += cp;
+        
+        if (i != n-1) {
+            int cp_sep = string_concat(res + res_len, sep, sep_size);
+            res_len += cp_sep;
+        }
+    }
+}
+
 // helpers
 
 void print_arr_char(char *arr, int size) {
@@ -111,17 +165,14 @@ void print_arr_float(float *arr, int size) {
 }
 
 int main() {
-    char str1[50];
-    char str2[50];
-
-    while (strcmp(str1, "exit") != 0) {
-        scanf("%49s", str1);
-        scanf("%49s", str2);
-        
-        int result = string_compare(str1, str2);
+    char* arrStr[] = {"string1", "str2", "string3"};
+    char* sep = "-";
+    char res[100];
+    res[0] = '\0';
     
-        printf("result: %d\n", result);
-    }
+    string_unir(arrStr, 3, sep, res);
+
+    printf("%s\n", res);
 
     return 0;
 }

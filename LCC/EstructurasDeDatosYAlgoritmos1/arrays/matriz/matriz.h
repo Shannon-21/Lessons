@@ -35,4 +35,9 @@ size_t matriz_num_filas(Matriz* matriz);
 */
 size_t matriz_num_columnas(Matriz* matriz);
 
+/*
+** imprime en formato lista la matriz
+*/
+void matriz_imprimir(Matriz* matriz);
+
 #endif /* __MATRIZ_H__ */

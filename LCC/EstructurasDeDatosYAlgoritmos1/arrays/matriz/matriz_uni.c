@@ -34,3 +34,7 @@ size_t matriz_num_filas(Matriz* matriz) {
 size_t matriz_num_columnas(Matriz* matriz) {
 
 }
+
+void matriz_imprimir(Matriz* matriz) {
+  
+}

@@ -4,6 +4,15 @@
 
 /*
 ** Implementacion utilizando un arreglo bidimensional (arreglo de punteros a arreglo)
+
+# ventajas:
+  - acceso intuitivo [fil][col]
+
+# desventajas:
+  - la reserva y liberacion tiene que ser ordeneda por fila al estar contenidas 
+  - los malloc por fila pueden alocarse lejos en memoria fisica unas de las otras, y esto empeora el rendimiento en operaciones grandes
+  - realiza mas mallocs que puede dejar espacios de memoria entre cada fila vacios inutiliables
+  - el tamaño total es rows * cols * sizeof(double) + qty punteros a cada fila
 */
 
 struct Matriz_ {

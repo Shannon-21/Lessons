@@ -94,3 +94,29 @@ void matriz_imprimir(Matriz* matriz) {
     printf("]\n");
   }
 }
+
+void matriz_intercambiar_filas(Matriz *matriz, size_t fila1, size_t fila2) {
+  if (matriz == NULL) return;
+  
+  size_t num_filas = matriz_num_filas(matriz);
+  size_t num_cols = matriz_num_columnas(matriz);
+  if (num_filas <= fila1 || num_filas <= fila2 || fila1 == fila2) return;
+
+  /*
+  123, 456, 789, 0, 3
+    - t=1;  723, 456, 789; 723, 456, 189;
+    - t=2;  783, 456, 189; 783, 456, 129;
+    - t=3;  789, 456, 129; 783, 456, 123;
+  */
+
+  for (size_t i = 0; i < num_cols; i++) {
+    double temp = matriz_leer(matriz, fila1, i);
+
+    matriz_escribir(matriz, fila1, i, matriz_leer(matriz, fila2, i));
+    matriz_escribir(matriz, fila2, i, temp);
+  }
+}
+
+void matriz_insertar_fila(Matriz *matriz, size_t posicion, double *fila) {
+  
+}

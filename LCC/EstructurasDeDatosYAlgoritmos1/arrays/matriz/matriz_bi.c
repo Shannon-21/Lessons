@@ -104,4 +104,44 @@ void matriz_imprimir(Matriz* matriz) {
   }
 }
 
+void matriz_intercambiar_filas(Matriz *matriz, size_t fila1, size_t fila2) {
+  if (matriz == NULL) return;
+  
+  size_t num_filas = matriz_num_filas(matriz);
+  size_t num_cols = matriz_num_columnas(matriz);
+  if (num_filas <= fila1 || num_filas <= fila2 || fila1 == fila2) return;
+
+  /* implementacion correcta pero ineficiente porque copia todos los datos de cada fila 
+     y alloca una fila nueva temporal
+  double *cache = (double *)malloc(sizeof(double) * num_cols);
+  if (cache == NULL) return;
+
+  for (size_t i = 0; i < num_cols; i++) {
+    double val = matriz_leer(matriz, fila1, i);
+    cache[i] = val;
+  }
+
+  for (size_t i = 0; i < num_cols; i++) {
+    double val = matriz_leer(matriz, fila2, i);
+    matriz_escribir(matriz, fila1, i, val);
+  }
+
+  for (size_t i = 0; i < num_cols; i++) {
+    double val = cache[i];
+    matriz_escribir(matriz, fila2, i, val);
+  }
+
+  free(cache);
+  */
+
+  // esta es mas eficiente porque solo reapunta punteros, no toca ningun valor
+  double *temp = matriz->data[fila1];
+  matriz->data[fila1] = matriz->data[fila2];
+  matriz->data[fila2] = temp;
+}
+
+void matriz_insertar_fila(Matriz *matriz, size_t posicion, double *fila) {
+  
+}
+
 

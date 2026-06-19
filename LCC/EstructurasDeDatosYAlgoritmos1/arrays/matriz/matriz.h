@@ -40,4 +40,14 @@ size_t matriz_num_columnas(Matriz* matriz);
 */
 void matriz_imprimir(Matriz* matriz);
 
+/*
+** intercambia dos filas de la matriz
+*/
+void matriz_intercambiar_filas(Matriz* matriz, size_t fila1, size_t fila2);
+
+/*
+** inserta una fila en una fila dada dezzplanzando los demas hacia abajo
+*/
+void matriz_insertar_fila(Matriz* matriz, size_t posicion, double *fila);
+
 #endif /* __MATRIZ_H__ */

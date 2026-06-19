@@ -3,7 +3,7 @@
 #include "matriz.h"
 
 int main() {
-    Matriz* m = matriz_crear(3, 3);
+    Matriz* m = matriz_crear(3, 4);
 
     double val = 1;
     for (size_t i = 0; i < matriz_num_filas(m); i++)
@@ -13,6 +13,11 @@ int main() {
         }
 
     matriz_imprimir(m);
+    printf("\n");
+
+    matriz_intercambiar_filas(m, 0 , 2);
+    matriz_imprimir(m);
+
     matriz_destruir(m);
 
     return 0;

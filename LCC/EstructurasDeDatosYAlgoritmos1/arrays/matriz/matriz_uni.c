@@ -1,6 +1,7 @@
 #include "matriz.h"
 #include <math.h>
 #include <stdio.h>
+#include <string.h>
 
 /*
 ** Implmentacion utilizando un unico arreglo unidimensional
@@ -118,5 +119,19 @@ void matriz_intercambiar_filas(Matriz *matriz, size_t fila1, size_t fila2) {
 }
 
 void matriz_insertar_fila(Matriz *matriz, size_t posicion, double *fila) {
+  if (matriz == NULL || fila == NULL || posicion > matriz_num_filas(matriz)) return;
   
+  double* r = (double *)realloc(matriz->data, (matriz_num_filas(matriz) + 1) * matriz_num_columnas(matriz) * sizeof(double));
+  if (r == NULL) return;
+  matriz->data = r;
+
+  // version ineficiente porque tira la nueva fila al final y 
+  // la empuja fila hasta posicion
+  // mas eficiente seria empujar todo desde pos hacia la derecha, y coloar fila en el espacio libre
+  memcpy(&matriz->data[matriz_num_filas(matriz) * matriz_num_columnas(matriz)], fila, matriz_num_columnas(matriz) * sizeof(double));
+  matriz->filas++;
+  
+  for (size_t i = matriz_num_filas(matriz) - 1; i > posicion; i--) {
+    matriz_intercambiar_filas(matriz, i, i - 1);
+  }  
 }

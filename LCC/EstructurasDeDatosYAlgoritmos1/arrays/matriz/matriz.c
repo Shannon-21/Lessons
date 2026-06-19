@@ -17,6 +17,13 @@ int main() {
 
     matriz_intercambiar_filas(m, 0 , 2);
     matriz_imprimir(m);
+    printf("\n");
+
+    double *fila = (double *)malloc(4 * sizeof(double));
+    fila[0] = 70.0; fila[1] = 80.0; fila[2] = 90.0; fila[3] = 100.0;
+    matriz_insertar_fila(m, 1, fila);
+    matriz_imprimir(m);
+    printf("\n");
 
     matriz_destruir(m);
 

@@ -141,7 +141,19 @@ void matriz_intercambiar_filas(Matriz *matriz, size_t fila1, size_t fila2) {
 }
 
 void matriz_insertar_fila(Matriz *matriz, size_t posicion, double *fila) {
+  if (matriz == NULL || fila == NULL || posicion > matriz_num_filas(matriz)) return;
   
+  double** r = (double **)realloc(matriz->data, (matriz_num_filas(matriz) + 1) * sizeof(double *));
+  if (r == NULL) return;
+  matriz->data = r;
+
+  matriz->filas++;
+  
+  for (size_t i = matriz_num_filas(matriz) - 1; i > posicion; i--) {
+    matriz->data[i] = matriz->data[i - 1];
+  }
+
+  matriz->data[posicion] = fila;
 }
 
 

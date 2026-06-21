@@ -120,18 +120,52 @@ void matriz_intercambiar_filas(Matriz *matriz, size_t fila1, size_t fila2) {
 
 void matriz_insertar_fila(Matriz *matriz, size_t posicion, double *fila) {
   if (matriz == NULL || fila == NULL || posicion > matriz_num_filas(matriz)) return;
+
+  size_t filasv = matriz_num_filas(matriz);
+  size_t colsv = matriz_num_columnas(matriz);
   
-  double* r = (double *)realloc(matriz->data, (matriz_num_filas(matriz) + 1) * matriz_num_columnas(matriz) * sizeof(double));
+  double* r = (double *)realloc(matriz->data, (filasv + 1) * colsv * sizeof(double));
   if (r == NULL) return;
   matriz->data = r;
 
-  // version ineficiente porque tira la nueva fila al final y 
-  // la empuja fila hasta posicion
-  // mas eficiente seria empujar todo desde pos hacia la derecha, y coloar fila en el espacio libre
+  /*
+  // version ineficiente porque tira la nueva fila al final y la empuja fila hasta posicion
+  // mas eficiente seria empujar todo desde pos hacia la derecha, y colocar fila en el espacio libre
   memcpy(&matriz->data[matriz_num_filas(matriz) * matriz_num_columnas(matriz)], fila, matriz_num_columnas(matriz) * sizeof(double));
   matriz->filas++;
   
   for (size_t i = matriz_num_filas(matriz) - 1; i > posicion; i--) {
     matriz_intercambiar_filas(matriz, i, i - 1);
-  }  
+  } 
+  */
+
+  /* empujar todo hacia adalnte n posiciones desde posicion
+  // memcpy desde posicion
+
+  // 123 456 789 abc def ghi jkm nop, 3, xyz
+  //  123 456 789 abc def ghi jkm nop ???, 3, xyz
+  //  memcpy(r[pos] + cols, r[pos:], n_cols) 123 456 789 abc abc def ghi jkm nop, 3, xyz
+  //  memcpy(r[pos], fila, n_cols) 123 456 789 xyz abc def ghi jkm nop, 3, xyz
+  */
+
+  size_t idx_insert = posicion * colsv;
+
+  // no dezplazar si queremos insertar al final
+  if (posicion < filasv) {
+    size_t mover = (filasv - posicion) * colsv;
+    
+    memmove(
+      &matriz->data[idx_insert + colsv], 
+      &matriz->data[idx_insert], 
+      mover * sizeof(double)
+    );
+  }
+
+  memcpy(
+    &matriz->data[idx_insert], 
+    fila, 
+    colsv * sizeof(double)
+  );
+
+  matriz->filas++;
 }

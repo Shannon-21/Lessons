@@ -55,3 +55,15 @@ int slist_longitud(SList lista) {
   return size;
 }
 
+SList slist_concatenar(SList list1, SList list2) {
+  if (list1 == NULL) return list2;
+  for (SNodo *nodo = list1; nodo != NULL; nodo = nodo->sig) {
+    if (nodo->sig == NULL) {
+      nodo->sig = list2;
+      break;
+    }
+  }
+  
+  return list1;
+}
+

@@ -47,4 +47,9 @@ void slist_recorrer(SList lista, FuncionVisitante visit);
  */
 int slist_longitud(SList lista);
 
+/**
+ * devuelve la concatenacion de dos listas, modificando la primera
+ */
+SList slist_concatenar(SList list1, SList list2);
+
 #endif /* __SLIST_H__ */

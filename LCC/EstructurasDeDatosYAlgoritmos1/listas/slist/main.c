@@ -15,10 +15,23 @@ int main(int argc, char *argv[]) {
   lista = slist_agregar_inicio(lista, 1);
   lista = slist_agregar_final(lista, 4);
 
+  SList lista2 = slist_crear();
+
+  lista2 = slist_agregar_inicio(lista2, 5);
+  lista2 = slist_agregar_inicio(lista2, 4);
+  lista2 = slist_agregar_inicio(lista2, 3);
+
   slist_recorrer(lista, imprimir_entero);
   puts("");
 
+  slist_recorrer(lista2, imprimir_entero);
+  puts("");
+
   imprimir_entero(slist_longitud(lista));
+  puts("");
+
+  SList concat = slist_concatenar(lista, lista2);
+  slist_recorrer(lista, imprimir_entero);
   puts("");
 
   slist_destruir(lista);

@@ -27,10 +27,19 @@ int main(int argc, char *argv[]) {
   slist_recorrer(lista2, imprimir_entero);
   puts("");
 
-  imprimir_entero(slist_longitud(lista));
+  slist_concatenar(lista, lista2);
+  slist_recorrer(lista, imprimir_entero);
   puts("");
 
-  SList concat = slist_concatenar(lista, lista2);
+  lista = slist_insertar(lista, 0, 0);
+  lista = slist_insertar(lista, 5, 5);
+  lista = slist_insertar(lista, 9, 6);
+  slist_recorrer(lista, imprimir_entero);
+  puts("");
+
+  lista = slist_eliminar(lista, 6);
+  lista = slist_eliminar(lista, 6);
+  lista = slist_eliminar(lista, 6);
   slist_recorrer(lista, imprimir_entero);
   puts("");
 
